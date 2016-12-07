@@ -4,6 +4,8 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = require('react');
@@ -50,6 +52,7 @@ var InfiniteScroll = function (_Component) {
 
             var _props = this.props,
                 children = _props.children,
+                className = _props.className,
                 element = _props.element,
                 hasMore = _props.hasMore,
                 initialLoad = _props.initialLoad,
@@ -59,15 +62,13 @@ var InfiniteScroll = function (_Component) {
                 threshold = _props.threshold,
                 useWindow = _props.useWindow,
                 isReverse = _props.isReverse,
-                props = _objectWithoutProperties(_props, ['children', 'element', 'hasMore', 'initialLoad', 'loader', 'loadMore', 'pageStart', 'threshold', 'useWindow', 'isReverse']);
+                props = _objectWithoutProperties(_props, ['children', 'className', 'element', 'hasMore', 'initialLoad', 'loader', 'loadMore', 'pageStart', 'threshold', 'useWindow', 'isReverse']);
 
-            var ref = function ref(node) {
+            props.ref = function (node) {
                 _this2.scrollComponent = node;
             };
 
-            return _react2.default.createElement(element, {
-                ref: ref
-            }, children);
+            return _react2.default.createElement(element, _extends({ className: className }, props), children, hasMore && (loader || this._defaultLoader));
         }
     }, {
         key: 'calculateTopPosition',
@@ -123,7 +124,7 @@ var InfiniteScroll = function (_Component) {
         value: function detachScrollListener() {
             var scrollEl = window;
             if (this.props.useWindow == false) {
-                scrollEl = ReactDOM.findDOMNode(this).parentNode;
+                scrollEl = this.scrollComponent.parentNode;
             }
 
             scrollEl.removeEventListener('scroll', this.scrollListener);
@@ -149,6 +150,7 @@ var InfiniteScroll = function (_Component) {
 
 InfiniteScroll.propTypes = {
     element: _react.PropTypes.string,
+    className: _react.PropTypes.string,
     hasMore: _react.PropTypes.bool,
     initialLoad: _react.PropTypes.bool,
     loadMore: _react.PropTypes.func.isRequired,
