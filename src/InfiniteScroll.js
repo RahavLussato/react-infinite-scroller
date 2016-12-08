@@ -4,6 +4,7 @@ export default class InfiniteScroll extends Component {
     static propTypes = {
         element: PropTypes.string,
         className: PropTypes.string,
+        style: PropTypes.object,
         hasMore: PropTypes.bool,
         initialLoad: PropTypes.bool,
         loadMore: PropTypes.func.isRequired,
@@ -42,6 +43,7 @@ export default class InfiniteScroll extends Component {
         const {
             children,
             className,
+            style,
             element,
             hasMore,
             initialLoad,
@@ -56,7 +58,7 @@ export default class InfiniteScroll extends Component {
 
         props.ref = (node) => { this.scrollComponent = node; };
 
-        return React.createElement(element, {className:className, ...props}, children, hasMore && (loader || this._defaultLoader));
+        return React.createElement(element, {className:className, style:style, ...props}, children, hasMore && (loader || this._defaultLoader));
     }
 
     calculateTopPosition(el) {
