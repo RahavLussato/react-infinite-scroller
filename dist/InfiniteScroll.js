@@ -53,6 +53,7 @@ var InfiniteScroll = function (_Component) {
             var _props = this.props,
                 children = _props.children,
                 className = _props.className,
+                style = _props.style,
                 element = _props.element,
                 hasMore = _props.hasMore,
                 initialLoad = _props.initialLoad,
@@ -62,13 +63,13 @@ var InfiniteScroll = function (_Component) {
                 threshold = _props.threshold,
                 useWindow = _props.useWindow,
                 isReverse = _props.isReverse,
-                props = _objectWithoutProperties(_props, ['children', 'className', 'element', 'hasMore', 'initialLoad', 'loader', 'loadMore', 'pageStart', 'threshold', 'useWindow', 'isReverse']);
+                props = _objectWithoutProperties(_props, ['children', 'className', 'style', 'element', 'hasMore', 'initialLoad', 'loader', 'loadMore', 'pageStart', 'threshold', 'useWindow', 'isReverse']);
 
             props.ref = function (node) {
                 _this2.scrollComponent = node;
             };
 
-            return _react2.default.createElement(element, _extends({ className: className }, props), children, hasMore && (loader || this._defaultLoader));
+            return _react2.default.createElement(element, _extends({ className: className, style: style }, props), children, hasMore && (loader || this._defaultLoader));
         }
     }, {
         key: 'calculateTopPosition',
@@ -151,6 +152,7 @@ var InfiniteScroll = function (_Component) {
 InfiniteScroll.propTypes = {
     element: _react.PropTypes.string,
     className: _react.PropTypes.string,
+    style: _react.PropTypes.object,
     hasMore: _react.PropTypes.bool,
     initialLoad: _react.PropTypes.bool,
     loadMore: _react.PropTypes.func.isRequired,
