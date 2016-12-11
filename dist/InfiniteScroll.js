@@ -90,7 +90,7 @@ var InfiniteScroll = function (_Component) {
                 var scrollTop = scrollEl.pageYOffset !== undefined ? scrollEl.pageYOffset : (document.documentElement || document.body.parentNode || document.body).scrollTop;
                 if (this.props.isReverse) offset = scrollTop;else offset = this.calculateTopPosition(el) + el.offsetHeight - scrollTop - window.innerHeight;
             } else {
-                if (this.props.isReverse) offset = el.parentNode.scrollTop;else offset = el.scrollHeight - el.parentNode.scrollTop - el.parentNode.clientHeight;
+                if (this.props.isReverse) offset = el.parentNode.scrollTop;else offset = el.scrollHeight > el.parentNode.clientHeight ? el.scrollHeight - el.parentNode.scrollTop - el.parentNode.clientHeight : el.parentNode.clientHeight;
             }
 
             if (offset < Number(this.props.threshold)) {
